@@ -7,17 +7,17 @@ package Model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -29,9 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pontosentrada.findAll", query = "SELECT p FROM Pontosentrada p")
-    , @NamedQuery(name = "Pontosentrada.findByIdentrada", query = "SELECT p FROM Pontosentrada p WHERE p.identrada = :identrada")
-    , @NamedQuery(name = "Pontosentrada.findByHora", query = "SELECT p FROM Pontosentrada p WHERE p.hora = :hora")
-    , @NamedQuery(name = "Pontosentrada.findByIdpontohorario", query = "SELECT p FROM Pontosentrada p WHERE p.idpontohorario = :idpontohorario")})
+    , @NamedQuery(name = "Pontosentrada.findByIdentrada", query = "SELECT p FROM Pontosentrada p WHERE p.identrada = :identrada")})
 public class Pontosentrada implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,25 +38,18 @@ public class Pontosentrada implements Serializable {
     @Basic(optional = false)
     @Column(name = "IDENTRADA")
     private BigDecimal identrada;
-    @Basic(optional = false)
-    @Column(name = "HORA")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date hora;
-    @Basic(optional = false)
-    @Column(name = "IDPONTOHORARIO")
-    private BigInteger idpontohorario;
+    @JoinColumns({
+        @JoinColumn(name = "IDPONTOHORARIO", referencedColumnName = "IDPONTOHORARIO")
+        , @JoinColumn(name = "HORA", referencedColumnName = "DATA")
+        , @JoinColumn(name = "IDENTRADA", referencedColumnName = "IDFUNCIONARIO", insertable = false, updatable = false)})
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Pontohorario pontohorario;
 
     public Pontosentrada() {
     }
 
     public Pontosentrada(BigDecimal identrada) {
         this.identrada = identrada;
-    }
-
-    public Pontosentrada(BigDecimal identrada, Date hora, BigInteger idpontohorario) {
-        this.identrada = identrada;
-        this.hora = hora;
-        this.idpontohorario = idpontohorario;
     }
 
     public BigDecimal getIdentrada() {
@@ -69,20 +60,12 @@ public class Pontosentrada implements Serializable {
         this.identrada = identrada;
     }
 
-    public Date getHora() {
-        return hora;
+    public Pontohorario getPontohorario() {
+        return pontohorario;
     }
 
-    public void setHora(Date hora) {
-        this.hora = hora;
-    }
-
-    public BigInteger getIdpontohorario() {
-        return idpontohorario;
-    }
-
-    public void setIdpontohorario(BigInteger idpontohorario) {
-        this.idpontohorario = idpontohorario;
+    public void setPontohorario(Pontohorario pontohorario) {
+        this.pontohorario = pontohorario;
     }
 
     @Override

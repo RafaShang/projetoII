@@ -6,7 +6,6 @@
 package Model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -42,8 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Funcionario.findByDatanascimento", query = "SELECT f FROM Funcionario f WHERE f.datanascimento = :datanascimento")
     , @NamedQuery(name = "Funcionario.findBySexo", query = "SELECT f FROM Funcionario f WHERE f.sexo = :sexo")
     , @NamedQuery(name = "Funcionario.findByActivo", query = "SELECT f FROM Funcionario f WHERE f.activo = :activo")
-    , @NamedQuery(name = "Funcionario.findByTipo", query = "SELECT f FROM Funcionario f WHERE f.tipo = :tipo")
-    , @NamedQuery(name = "Funcionario.findByIdhorario", query = "SELECT f FROM Funcionario f WHERE f.idhorario = :idhorario")})
+    , @NamedQuery(name = "Funcionario.findByTipo", query = "SELECT f FROM Funcionario f WHERE f.tipo = :tipo")})
 public class Funcionario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -73,10 +71,13 @@ public class Funcionario implements Serializable {
     @Basic(optional = false)
     @Column(name = "TIPO")
     private short tipo;
-    @Column(name = "IDHORARIO")
-    private BigInteger idhorario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idfuncionario", fetch = FetchType.LAZY)
     private List<Venda> vendaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario", fetch = FetchType.LAZY)
+    private List<Pontohorario> pontohorarioList;
+    @JoinColumn(name = "IDHORARIO", referencedColumnName = "IDHORARIO")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Horario idhorario;
     @JoinColumn(name = "IDLOCALTRABALHO", referencedColumnName = "IDLOCALTRABALHO")
     @ManyToOne(fetch = FetchType.LAZY)
     private Localtrabalho idlocaltrabalho;
@@ -167,14 +168,6 @@ public class Funcionario implements Serializable {
         this.tipo = tipo;
     }
 
-    public BigInteger getIdhorario() {
-        return idhorario;
-    }
-
-    public void setIdhorario(BigInteger idhorario) {
-        this.idhorario = idhorario;
-    }
-
     @XmlTransient
     public List<Venda> getVendaList() {
         return vendaList;
@@ -182,6 +175,23 @@ public class Funcionario implements Serializable {
 
     public void setVendaList(List<Venda> vendaList) {
         this.vendaList = vendaList;
+    }
+
+    @XmlTransient
+    public List<Pontohorario> getPontohorarioList() {
+        return pontohorarioList;
+    }
+
+    public void setPontohorarioList(List<Pontohorario> pontohorarioList) {
+        this.pontohorarioList = pontohorarioList;
+    }
+
+    public Horario getIdhorario() {
+        return idhorario;
+    }
+
+    public void setIdhorario(Horario idhorario) {
+        this.idhorario = idhorario;
     }
 
     public Localtrabalho getIdlocaltrabalho() {

@@ -8,14 +8,21 @@ package Model;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,8 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Pontohorario.findAll", query = "SELECT p FROM Pontohorario p")
     , @NamedQuery(name = "Pontohorario.findByIdpontohorario", query = "SELECT p FROM Pontohorario p WHERE p.pontohorarioPK.idpontohorario = :idpontohorario")
     , @NamedQuery(name = "Pontohorario.findByData", query = "SELECT p FROM Pontohorario p WHERE p.pontohorarioPK.data = :data")
-    , @NamedQuery(name = "Pontohorario.findByDiasemana", query = "SELECT p FROM Pontohorario p WHERE p.pontohorarioPK.diasemana = :diasemana")
-    , @NamedQuery(name = "Pontohorario.findByIdhorario", query = "SELECT p FROM Pontohorario p WHERE p.idhorario = :idhorario")
+    , @NamedQuery(name = "Pontohorario.findByDiasemana", query = "SELECT p FROM Pontohorario p WHERE p.diasemana = :diasemana")
     , @NamedQuery(name = "Pontohorario.findByIdfuncionario", query = "SELECT p FROM Pontohorario p WHERE p.pontohorarioPK.idfuncionario = :idfuncionario")})
 public class Pontohorario implements Serializable {
 
@@ -37,8 +43,18 @@ public class Pontohorario implements Serializable {
     @EmbeddedId
     protected PontohorarioPK pontohorarioPK;
     @Basic(optional = false)
-    @Column(name = "IDHORARIO")
-    private BigInteger idhorario;
+    @Column(name = "DIASEMANA")
+    private short diasemana;
+    @JoinColumn(name = "IDFUNCIONARIO", referencedColumnName = "IDFUNCIONARIO", insertable = false, updatable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Funcionario funcionario;
+    @JoinColumn(name = "IDHORARIO", referencedColumnName = "IDHORARIO")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Horario idhorario;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pontohorario", fetch = FetchType.LAZY)
+    private List<Pontossaida> pontossaidaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pontohorario", fetch = FetchType.LAZY)
+    private List<Pontosentrada> pontosentradaList;
 
     public Pontohorario() {
     }
@@ -47,13 +63,13 @@ public class Pontohorario implements Serializable {
         this.pontohorarioPK = pontohorarioPK;
     }
 
-    public Pontohorario(PontohorarioPK pontohorarioPK, BigInteger idhorario) {
+    public Pontohorario(PontohorarioPK pontohorarioPK, short diasemana) {
         this.pontohorarioPK = pontohorarioPK;
-        this.idhorario = idhorario;
+        this.diasemana = diasemana;
     }
 
-    public Pontohorario(BigInteger idpontohorario, Date data, short diasemana, BigInteger idfuncionario) {
-        this.pontohorarioPK = new PontohorarioPK(idpontohorario, data, diasemana, idfuncionario);
+    public Pontohorario(BigInteger idpontohorario, Date data, BigInteger idfuncionario) {
+        this.pontohorarioPK = new PontohorarioPK(idpontohorario, data, idfuncionario);
     }
 
     public PontohorarioPK getPontohorarioPK() {
@@ -64,12 +80,46 @@ public class Pontohorario implements Serializable {
         this.pontohorarioPK = pontohorarioPK;
     }
 
-    public BigInteger getIdhorario() {
+    public short getDiasemana() {
+        return diasemana;
+    }
+
+    public void setDiasemana(short diasemana) {
+        this.diasemana = diasemana;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public Horario getIdhorario() {
         return idhorario;
     }
 
-    public void setIdhorario(BigInteger idhorario) {
+    public void setIdhorario(Horario idhorario) {
         this.idhorario = idhorario;
+    }
+
+    @XmlTransient
+    public List<Pontossaida> getPontossaidaList() {
+        return pontossaidaList;
+    }
+
+    public void setPontossaidaList(List<Pontossaida> pontossaidaList) {
+        this.pontossaidaList = pontossaidaList;
+    }
+
+    @XmlTransient
+    public List<Pontosentrada> getPontosentradaList() {
+        return pontosentradaList;
+    }
+
+    public void setPontosentradaList(List<Pontosentrada> pontosentradaList) {
+        this.pontosentradaList = pontosentradaList;
     }
 
     @Override

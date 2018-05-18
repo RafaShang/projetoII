@@ -29,19 +29,15 @@ public class PontohorarioPK implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date data;
     @Basic(optional = false)
-    @Column(name = "DIASEMANA")
-    private short diasemana;
-    @Basic(optional = false)
     @Column(name = "IDFUNCIONARIO")
     private BigInteger idfuncionario;
 
     public PontohorarioPK() {
     }
 
-    public PontohorarioPK(BigInteger idpontohorario, Date data, short diasemana, BigInteger idfuncionario) {
+    public PontohorarioPK(BigInteger idpontohorario, Date data, BigInteger idfuncionario) {
         this.idpontohorario = idpontohorario;
         this.data = data;
-        this.diasemana = diasemana;
         this.idfuncionario = idfuncionario;
     }
 
@@ -61,14 +57,6 @@ public class PontohorarioPK implements Serializable {
         this.data = data;
     }
 
-    public short getDiasemana() {
-        return diasemana;
-    }
-
-    public void setDiasemana(short diasemana) {
-        this.diasemana = diasemana;
-    }
-
     public BigInteger getIdfuncionario() {
         return idfuncionario;
     }
@@ -82,7 +70,6 @@ public class PontohorarioPK implements Serializable {
         int hash = 0;
         hash += (idpontohorario != null ? idpontohorario.hashCode() : 0);
         hash += (data != null ? data.hashCode() : 0);
-        hash += (int) diasemana;
         hash += (idfuncionario != null ? idfuncionario.hashCode() : 0);
         return hash;
     }
@@ -100,9 +87,6 @@ public class PontohorarioPK implements Serializable {
         if ((this.data == null && other.data != null) || (this.data != null && !this.data.equals(other.data))) {
             return false;
         }
-        if (this.diasemana != other.diasemana) {
-            return false;
-        }
         if ((this.idfuncionario == null && other.idfuncionario != null) || (this.idfuncionario != null && !this.idfuncionario.equals(other.idfuncionario))) {
             return false;
         }
@@ -111,7 +95,7 @@ public class PontohorarioPK implements Serializable {
 
     @Override
     public String toString() {
-        return "Model.PontohorarioPK[ idpontohorario=" + idpontohorario + ", data=" + data + ", diasemana=" + diasemana + ", idfuncionario=" + idfuncionario + " ]";
+        return "Model.PontohorarioPK[ idpontohorario=" + idpontohorario + ", data=" + data + ", idfuncionario=" + idfuncionario + " ]";
     }
     
 }

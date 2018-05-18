@@ -8,16 +8,21 @@ package Model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -57,6 +62,10 @@ public class Horario implements Serializable {
     @Column(name = "HORASEGUNDASAIDA")
     @Temporal(TemporalType.TIMESTAMP)
     private Date horasegundasaida;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idhorario", fetch = FetchType.LAZY)
+    private List<Pontohorario> pontohorarioList;
+    @OneToMany(mappedBy = "idhorario", fetch = FetchType.LAZY)
+    private List<Funcionario> funcionarioList;
 
     public Horario() {
     }
@@ -111,6 +120,24 @@ public class Horario implements Serializable {
 
     public void setHorasegundasaida(Date horasegundasaida) {
         this.horasegundasaida = horasegundasaida;
+    }
+
+    @XmlTransient
+    public List<Pontohorario> getPontohorarioList() {
+        return pontohorarioList;
+    }
+
+    public void setPontohorarioList(List<Pontohorario> pontohorarioList) {
+        this.pontohorarioList = pontohorarioList;
+    }
+
+    @XmlTransient
+    public List<Funcionario> getFuncionarioList() {
+        return funcionarioList;
+    }
+
+    public void setFuncionarioList(List<Funcionario> funcionarioList) {
+        this.funcionarioList = funcionarioList;
     }
 
     @Override
