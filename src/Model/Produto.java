@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BaseDados;
+package Model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -68,13 +68,13 @@ public class Produto implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Tipoproduto idtipoproduto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto", fetch = FetchType.LAZY)
-    private Collection<Produtoloja> produtolojaCollection;
+    private List<Produtoloja> produtolojaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto", fetch = FetchType.LAZY)
-    private Collection<Produtoentrega> produtoentregaCollection;
+    private List<Produtoentrega> produtoentregaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto", fetch = FetchType.LAZY)
-    private Collection<Produtovenda> produtovendaCollection;
+    private List<Produtovenda> produtovendaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto", fetch = FetchType.LAZY)
-    private Collection<Caixa> caixaCollection;
+    private List<Caixa> caixaList;
 
     public Produto() {
     }
@@ -164,39 +164,39 @@ public class Produto implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Produtoloja> getProdutolojaCollection() {
-        return produtolojaCollection;
+    public List<Produtoloja> getProdutolojaList() {
+        return produtolojaList;
     }
 
-    public void setProdutolojaCollection(Collection<Produtoloja> produtolojaCollection) {
-        this.produtolojaCollection = produtolojaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Produtoentrega> getProdutoentregaCollection() {
-        return produtoentregaCollection;
-    }
-
-    public void setProdutoentregaCollection(Collection<Produtoentrega> produtoentregaCollection) {
-        this.produtoentregaCollection = produtoentregaCollection;
+    public void setProdutolojaList(List<Produtoloja> produtolojaList) {
+        this.produtolojaList = produtolojaList;
     }
 
     @XmlTransient
-    public Collection<Produtovenda> getProdutovendaCollection() {
-        return produtovendaCollection;
+    public List<Produtoentrega> getProdutoentregaList() {
+        return produtoentregaList;
     }
 
-    public void setProdutovendaCollection(Collection<Produtovenda> produtovendaCollection) {
-        this.produtovendaCollection = produtovendaCollection;
+    public void setProdutoentregaList(List<Produtoentrega> produtoentregaList) {
+        this.produtoentregaList = produtoentregaList;
     }
 
     @XmlTransient
-    public Collection<Caixa> getCaixaCollection() {
-        return caixaCollection;
+    public List<Produtovenda> getProdutovendaList() {
+        return produtovendaList;
     }
 
-    public void setCaixaCollection(Collection<Caixa> caixaCollection) {
-        this.caixaCollection = caixaCollection;
+    public void setProdutovendaList(List<Produtovenda> produtovendaList) {
+        this.produtovendaList = produtovendaList;
+    }
+
+    @XmlTransient
+    public List<Caixa> getCaixaList() {
+        return caixaList;
+    }
+
+    public void setCaixaList(List<Caixa> caixaList) {
+        this.caixaList = caixaList;
     }
 
     @Override
@@ -221,7 +221,7 @@ public class Produto implements Serializable {
 
     @Override
     public String toString() {
-        return "BaseDados.Produto[ codbarras=" + codbarras + " ]";
+        return "Model.Produto[ codbarras=" + codbarras + " ]";
     }
     
 }

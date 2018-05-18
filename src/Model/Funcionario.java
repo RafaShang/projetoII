@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BaseDados;
+package Model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,7 +41,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Funcionario.findByPassword", query = "SELECT f FROM Funcionario f WHERE f.password = :password")
     , @NamedQuery(name = "Funcionario.findByDatanascimento", query = "SELECT f FROM Funcionario f WHERE f.datanascimento = :datanascimento")
     , @NamedQuery(name = "Funcionario.findBySexo", query = "SELECT f FROM Funcionario f WHERE f.sexo = :sexo")
-    , @NamedQuery(name = "Funcionario.findByActivo", query = "SELECT f FROM Funcionario f WHERE f.activo = :activo")})
+    , @NamedQuery(name = "Funcionario.findByActivo", query = "SELECT f FROM Funcionario f WHERE f.activo = :activo")
+    , @NamedQuery(name = "Funcionario.findByTipo", query = "SELECT f FROM Funcionario f WHERE f.tipo = :tipo")
+    , @NamedQuery(name = "Funcionario.findByIdhorario", query = "SELECT f FROM Funcionario f WHERE f.idhorario = :idhorario")})
 public class Funcionario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -67,15 +70,20 @@ public class Funcionario implements Serializable {
     @Basic(optional = false)
     @Column(name = "ACTIVO")
     private short activo;
+    @Basic(optional = false)
+    @Column(name = "TIPO")
+    private short tipo;
+    @Column(name = "IDHORARIO")
+    private BigInteger idhorario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idfuncionario", fetch = FetchType.LAZY)
-    private Collection<Venda> vendaCollection;
+    private List<Venda> vendaList;
     @JoinColumn(name = "IDLOCALTRABALHO", referencedColumnName = "IDLOCALTRABALHO")
     @ManyToOne(fetch = FetchType.LAZY)
     private Localtrabalho idlocaltrabalho;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idfuncionarioentrega", fetch = FetchType.LAZY)
-    private Collection<Entrega> entregaCollection;
+    private List<Entrega> entregaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idfuncionariorecebe", fetch = FetchType.LAZY)
-    private Collection<Entrega> entregaCollection1;
+    private List<Entrega> entregaList1;
 
     public Funcionario() {
     }
@@ -84,7 +92,7 @@ public class Funcionario implements Serializable {
         this.idfuncionario = idfuncionario;
     }
 
-    public Funcionario(Short idfuncionario, String nome, String username, short password, Date datanascimento, Character sexo, short activo) {
+    public Funcionario(Short idfuncionario, String nome, String username, short password, Date datanascimento, Character sexo, short activo, short tipo) {
         this.idfuncionario = idfuncionario;
         this.nome = nome;
         this.username = username;
@@ -92,6 +100,7 @@ public class Funcionario implements Serializable {
         this.datanascimento = datanascimento;
         this.sexo = sexo;
         this.activo = activo;
+        this.tipo = tipo;
     }
 
     public Short getIdfuncionario() {
@@ -150,13 +159,29 @@ public class Funcionario implements Serializable {
         this.activo = activo;
     }
 
-    @XmlTransient
-    public Collection<Venda> getVendaCollection() {
-        return vendaCollection;
+    public short getTipo() {
+        return tipo;
     }
 
-    public void setVendaCollection(Collection<Venda> vendaCollection) {
-        this.vendaCollection = vendaCollection;
+    public void setTipo(short tipo) {
+        this.tipo = tipo;
+    }
+
+    public BigInteger getIdhorario() {
+        return idhorario;
+    }
+
+    public void setIdhorario(BigInteger idhorario) {
+        this.idhorario = idhorario;
+    }
+
+    @XmlTransient
+    public List<Venda> getVendaList() {
+        return vendaList;
+    }
+
+    public void setVendaList(List<Venda> vendaList) {
+        this.vendaList = vendaList;
     }
 
     public Localtrabalho getIdlocaltrabalho() {
@@ -168,21 +193,21 @@ public class Funcionario implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Entrega> getEntregaCollection() {
-        return entregaCollection;
+    public List<Entrega> getEntregaList() {
+        return entregaList;
     }
 
-    public void setEntregaCollection(Collection<Entrega> entregaCollection) {
-        this.entregaCollection = entregaCollection;
+    public void setEntregaList(List<Entrega> entregaList) {
+        this.entregaList = entregaList;
     }
 
     @XmlTransient
-    public Collection<Entrega> getEntregaCollection1() {
-        return entregaCollection1;
+    public List<Entrega> getEntregaList1() {
+        return entregaList1;
     }
 
-    public void setEntregaCollection1(Collection<Entrega> entregaCollection1) {
-        this.entregaCollection1 = entregaCollection1;
+    public void setEntregaList1(List<Entrega> entregaList1) {
+        this.entregaList1 = entregaList1;
     }
 
     @Override
@@ -207,7 +232,7 @@ public class Funcionario implements Serializable {
 
     @Override
     public String toString() {
-        return "BaseDados.Funcionario[ idfuncionario=" + idfuncionario + " ]";
+        return "Model.Funcionario[ idfuncionario=" + idfuncionario + " ]";
     }
     
 }

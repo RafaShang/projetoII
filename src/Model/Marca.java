@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BaseDados;
+package Model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,43 +25,43 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Rafael
  */
 @Entity
-@Table(name = "COR")
+@Table(name = "MARCA")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cor.findAll", query = "SELECT c FROM Cor c")
-    , @NamedQuery(name = "Cor.findByIdcor", query = "SELECT c FROM Cor c WHERE c.idcor = :idcor")
-    , @NamedQuery(name = "Cor.findByNome", query = "SELECT c FROM Cor c WHERE c.nome = :nome")})
-public class Cor implements Serializable {
+    @NamedQuery(name = "Marca.findAll", query = "SELECT m FROM Marca m")
+    , @NamedQuery(name = "Marca.findByIdmarca", query = "SELECT m FROM Marca m WHERE m.idmarca = :idmarca")
+    , @NamedQuery(name = "Marca.findByNome", query = "SELECT m FROM Marca m WHERE m.nome = :nome")})
+public class Marca implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "IDCOR")
-    private Short idcor;
+    @Column(name = "IDMARCA")
+    private Short idmarca;
     @Basic(optional = false)
     @Column(name = "NOME")
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcor", fetch = FetchType.LAZY)
-    private Collection<Produto> produtoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmarca", fetch = FetchType.LAZY)
+    private List<Produto> produtoList;
 
-    public Cor() {
+    public Marca() {
     }
 
-    public Cor(Short idcor) {
-        this.idcor = idcor;
+    public Marca(Short idmarca) {
+        this.idmarca = idmarca;
     }
 
-    public Cor(Short idcor, String nome) {
-        this.idcor = idcor;
+    public Marca(Short idmarca, String nome) {
+        this.idmarca = idmarca;
         this.nome = nome;
     }
 
-    public Short getIdcor() {
-        return idcor;
+    public Short getIdmarca() {
+        return idmarca;
     }
 
-    public void setIdcor(Short idcor) {
-        this.idcor = idcor;
+    public void setIdmarca(Short idmarca) {
+        this.idmarca = idmarca;
     }
 
     public String getNome() {
@@ -73,29 +73,29 @@ public class Cor implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Produto> getProdutoCollection() {
-        return produtoCollection;
+    public List<Produto> getProdutoList() {
+        return produtoList;
     }
 
-    public void setProdutoCollection(Collection<Produto> produtoCollection) {
-        this.produtoCollection = produtoCollection;
+    public void setProdutoList(List<Produto> produtoList) {
+        this.produtoList = produtoList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idcor != null ? idcor.hashCode() : 0);
+        hash += (idmarca != null ? idmarca.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cor)) {
+        if (!(object instanceof Marca)) {
             return false;
         }
-        Cor other = (Cor) object;
-        if ((this.idcor == null && other.idcor != null) || (this.idcor != null && !this.idcor.equals(other.idcor))) {
+        Marca other = (Marca) object;
+        if ((this.idmarca == null && other.idmarca != null) || (this.idmarca != null && !this.idmarca.equals(other.idmarca))) {
             return false;
         }
         return true;
@@ -103,7 +103,7 @@ public class Cor implements Serializable {
 
     @Override
     public String toString() {
-        return "BaseDados.Cor[ idcor=" + idcor + " ]";
+        return "Model.Marca[ idmarca=" + idmarca + " ]";
     }
     
 }

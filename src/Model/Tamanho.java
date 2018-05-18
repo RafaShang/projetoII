@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BaseDados;
+package Model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -42,7 +42,7 @@ public class Tamanho implements Serializable {
     @Column(name = "DESCRICAO")
     private String descricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtamanho", fetch = FetchType.LAZY)
-    private Collection<Produto> produtoCollection;
+    private List<Produto> produtoList;
 
     public Tamanho() {
     }
@@ -73,12 +73,12 @@ public class Tamanho implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Produto> getProdutoCollection() {
-        return produtoCollection;
+    public List<Produto> getProdutoList() {
+        return produtoList;
     }
 
-    public void setProdutoCollection(Collection<Produto> produtoCollection) {
-        this.produtoCollection = produtoCollection;
+    public void setProdutoList(List<Produto> produtoList) {
+        this.produtoList = produtoList;
     }
 
     @Override
@@ -103,7 +103,7 @@ public class Tamanho implements Serializable {
 
     @Override
     public String toString() {
-        return "BaseDados.Tamanho[ idtamanho=" + idtamanho + " ]";
+        return "Model.Tamanho[ idtamanho=" + idtamanho + " ]";
     }
     
 }

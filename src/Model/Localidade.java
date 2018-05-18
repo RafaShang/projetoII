@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BaseDados;
+package Model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -42,9 +42,9 @@ public class Localidade implements Serializable {
     @Column(name = "NOME")
     private String nome;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idlocalidade", fetch = FetchType.LAZY)
-    private Collection<Armazem> armazemCollection;
+    private List<Armazem> armazemList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idlocalidade", fetch = FetchType.LAZY)
-    private Collection<Loja> lojaCollection;
+    private List<Loja> lojaList;
 
     public Localidade() {
     }
@@ -75,21 +75,21 @@ public class Localidade implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Armazem> getArmazemCollection() {
-        return armazemCollection;
+    public List<Armazem> getArmazemList() {
+        return armazemList;
     }
 
-    public void setArmazemCollection(Collection<Armazem> armazemCollection) {
-        this.armazemCollection = armazemCollection;
+    public void setArmazemList(List<Armazem> armazemList) {
+        this.armazemList = armazemList;
     }
 
     @XmlTransient
-    public Collection<Loja> getLojaCollection() {
-        return lojaCollection;
+    public List<Loja> getLojaList() {
+        return lojaList;
     }
 
-    public void setLojaCollection(Collection<Loja> lojaCollection) {
-        this.lojaCollection = lojaCollection;
+    public void setLojaList(List<Loja> lojaList) {
+        this.lojaList = lojaList;
     }
 
     @Override
@@ -114,7 +114,7 @@ public class Localidade implements Serializable {
 
     @Override
     public String toString() {
-        return "BaseDados.Localidade[ idlocalidade=" + idlocalidade + " ]";
+        return "Model.Localidade[ idlocalidade=" + idlocalidade + " ]";
     }
     
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BaseDados;
+package Model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -115,7 +115,7 @@ public class Produtovenda implements Serializable {
 
     @Override
     public String toString() {
-        return "BaseDados.Produtovenda[ produtovendaPK=" + produtovendaPK + " ]";
+        return "Model.Produtovenda[ produtovendaPK=" + produtovendaPK + " ]";
     }
     
 }

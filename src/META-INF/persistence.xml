@@ -2,23 +2,27 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="ProjetoIIPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>BaseDados.Armazem</class>
-    <class>BaseDados.Tamanho</class>
-    <class>BaseDados.Marca</class>
-    <class>BaseDados.Caixa</class>
-    <class>BaseDados.Funcionario</class>
-    <class>BaseDados.Produto</class>
-    <class>BaseDados.Produtoentrega</class>
-    <class>BaseDados.Localidade</class>
-    <class>BaseDados.Venda</class>
-    <class>BaseDados.Tipopagamento</class>
-    <class>BaseDados.Produtoloja</class>
-    <class>BaseDados.Entrega</class>
-    <class>BaseDados.Produtovenda</class>
-    <class>BaseDados.Localtrabalho</class>
-    <class>BaseDados.Tipoproduto</class>
-    <class>BaseDados.Cor</class>
-    <class>BaseDados.Loja</class>
+    <class>Model.Produto</class>
+    <class>Model.Cor</class>
+    <class>Model.Localidade</class>
+    <class>Model.Entrega</class>
+    <class>Model.Pontohorario</class>
+    <class>Model.Marca</class>
+    <class>Model.Produtoloja</class>
+    <class>Model.Tipoproduto</class>
+    <class>Model.Pontossaida</class>
+    <class>Model.Produtovenda</class>
+    <class>Model.Loja</class>
+    <class>Model.Funcionario</class>
+    <class>Model.Venda</class>
+    <class>Model.Produtoentrega</class>
+    <class>Model.Tipopagamento</class>
+    <class>Model.Localtrabalho</class>
+    <class>Model.Armazem</class>
+    <class>Model.Pontosentrada</class>
+    <class>Model.Caixa</class>
+    <class>Model.Tamanho</class>
+    <class>Model.Horario</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
       <property name="javax.persistence.jdbc.user" value="projecto"/>

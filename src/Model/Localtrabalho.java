@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BaseDados;
+package Model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +37,7 @@ public class Localtrabalho implements Serializable {
     @Column(name = "IDLOCALTRABALHO")
     private Short idlocaltrabalho;
     @OneToMany(mappedBy = "idlocaltrabalho", fetch = FetchType.LAZY)
-    private Collection<Funcionario> funcionarioCollection;
+    private List<Funcionario> funcionarioList;
 
     public Localtrabalho() {
     }
@@ -55,12 +55,12 @@ public class Localtrabalho implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Funcionario> getFuncionarioCollection() {
-        return funcionarioCollection;
+    public List<Funcionario> getFuncionarioList() {
+        return funcionarioList;
     }
 
-    public void setFuncionarioCollection(Collection<Funcionario> funcionarioCollection) {
-        this.funcionarioCollection = funcionarioCollection;
+    public void setFuncionarioList(List<Funcionario> funcionarioList) {
+        this.funcionarioList = funcionarioList;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class Localtrabalho implements Serializable {
 
     @Override
     public String toString() {
-        return "BaseDados.Localtrabalho[ idlocaltrabalho=" + idlocaltrabalho + " ]";
+        return "Model.Localtrabalho[ idlocaltrabalho=" + idlocaltrabalho + " ]";
     }
     
 }

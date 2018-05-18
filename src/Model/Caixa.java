@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BaseDados;
+package Model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -128,7 +128,7 @@ public class Caixa implements Serializable {
 
     @Override
     public String toString() {
-        return "BaseDados.Caixa[ caixaPK=" + caixaPK + " ]";
+        return "Model.Caixa[ caixaPK=" + caixaPK + " ]";
     }
     
 }

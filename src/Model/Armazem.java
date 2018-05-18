@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BaseDados;
+package Model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -47,9 +47,9 @@ public class Armazem implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Localidade idlocalidade;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idarmazem", fetch = FetchType.LAZY)
-    private Collection<Entrega> entregaCollection;
+    private List<Entrega> entregaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "armazem", fetch = FetchType.LAZY)
-    private Collection<Caixa> caixaCollection;
+    private List<Caixa> caixaList;
 
     public Armazem() {
     }
@@ -88,21 +88,21 @@ public class Armazem implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Entrega> getEntregaCollection() {
-        return entregaCollection;
+    public List<Entrega> getEntregaList() {
+        return entregaList;
     }
 
-    public void setEntregaCollection(Collection<Entrega> entregaCollection) {
-        this.entregaCollection = entregaCollection;
+    public void setEntregaList(List<Entrega> entregaList) {
+        this.entregaList = entregaList;
     }
 
     @XmlTransient
-    public Collection<Caixa> getCaixaCollection() {
-        return caixaCollection;
+    public List<Caixa> getCaixaList() {
+        return caixaList;
     }
 
-    public void setCaixaCollection(Collection<Caixa> caixaCollection) {
-        this.caixaCollection = caixaCollection;
+    public void setCaixaList(List<Caixa> caixaList) {
+        this.caixaList = caixaList;
     }
 
     @Override
@@ -127,7 +127,7 @@ public class Armazem implements Serializable {
 
     @Override
     public String toString() {
-        return "BaseDados.Armazem[ idarmazem=" + idarmazem + " ]";
+        return "Model.Armazem[ idarmazem=" + idarmazem + " ]";
     }
     
 }

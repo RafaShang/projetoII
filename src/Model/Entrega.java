@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BaseDados;
+package Model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -57,7 +57,7 @@ public class Entrega implements Serializable {
     @Column(name = "CONFIRMADO")
     private short confirmado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "entrega", fetch = FetchType.LAZY)
-    private Collection<Produtoentrega> produtoentregaCollection;
+    private List<Produtoentrega> produtoentregaList;
     @JoinColumn(name = "IDARMAZEM", referencedColumnName = "IDARMAZEM")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Armazem idarmazem;
@@ -118,12 +118,12 @@ public class Entrega implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Produtoentrega> getProdutoentregaCollection() {
-        return produtoentregaCollection;
+    public List<Produtoentrega> getProdutoentregaList() {
+        return produtoentregaList;
     }
 
-    public void setProdutoentregaCollection(Collection<Produtoentrega> produtoentregaCollection) {
-        this.produtoentregaCollection = produtoentregaCollection;
+    public void setProdutoentregaList(List<Produtoentrega> produtoentregaList) {
+        this.produtoentregaList = produtoentregaList;
     }
 
     public Armazem getIdarmazem() {
@@ -180,7 +180,7 @@ public class Entrega implements Serializable {
 
     @Override
     public String toString() {
-        return "BaseDados.Entrega[ identrega=" + identrega + " ]";
+        return "Model.Entrega[ identrega=" + identrega + " ]";
     }
     
 }
