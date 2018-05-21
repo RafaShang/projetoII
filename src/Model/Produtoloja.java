@@ -10,7 +10,6 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -38,11 +37,14 @@ public class Produtoloja implements Serializable {
     @Basic(optional = false)
     @Column(name = "QUANTIDADE")
     private short quantidade;
+    @JoinColumn(name = "IDDISCONTO", referencedColumnName = "IDDESCONTO")
+    @ManyToOne(optional = false)
+    private Disconto iddisconto;
     @JoinColumn(name = "IDLOJA", referencedColumnName = "IDLOJA", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Loja loja;
     @JoinColumn(name = "CODBARRAS", referencedColumnName = "CODBARRAS", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Produto produto;
 
     public Produtoloja() {
@@ -75,6 +77,14 @@ public class Produtoloja implements Serializable {
 
     public void setQuantidade(short quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public Disconto getIddisconto() {
+        return iddisconto;
+    }
+
+    public void setIddisconto(Disconto iddisconto) {
+        this.iddisconto = iddisconto;
     }
 
     public Loja getLoja() {

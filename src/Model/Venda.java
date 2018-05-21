@@ -6,13 +6,12 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -37,14 +36,15 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Venda.findByIdvenda", query = "SELECT v FROM Venda v WHERE v.idvenda = :idvenda")
     , @NamedQuery(name = "Venda.findByDatavenda", query = "SELECT v FROM Venda v WHERE v.datavenda = :datavenda")
     , @NamedQuery(name = "Venda.findByValortotal", query = "SELECT v FROM Venda v WHERE v.valortotal = :valortotal")
-    , @NamedQuery(name = "Venda.findByValorganho", query = "SELECT v FROM Venda v WHERE v.valorganho = :valorganho")})
+    , @NamedQuery(name = "Venda.findByValorganho", query = "SELECT v FROM Venda v WHERE v.valorganho = :valorganho")
+    , @NamedQuery(name = "Venda.findByEstado", query = "SELECT v FROM Venda v WHERE v.estado = :estado")})
 public class Venda implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "IDVENDA")
-    private Integer idvenda;
+    private Long idvenda;
     @Basic(optional = false)
     @Column(name = "DATAVENDA")
     @Temporal(TemporalType.TIMESTAMP)
@@ -55,37 +55,41 @@ public class Venda implements Serializable {
     @Basic(optional = false)
     @Column(name = "VALORGANHO")
     private long valorganho;
+    @Basic(optional = false)
+    @Column(name = "ESTADO")
+    private short estado;
     @JoinColumn(name = "IDFUNCIONARIO", referencedColumnName = "IDFUNCIONARIO")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Funcionario idfuncionario;
     @JoinColumn(name = "IDLOJA", referencedColumnName = "IDLOJA")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Loja idloja;
     @JoinColumn(name = "TIPOPAGAMENTO", referencedColumnName = "IDTIPOPAGAMENTO")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Tipopagamento tipopagamento;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "venda", fetch = FetchType.LAZY)
-    private List<Produtovenda> produtovendaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "venda")
+    private Collection<Produtovenda> produtovendaCollection;
 
     public Venda() {
     }
 
-    public Venda(Integer idvenda) {
+    public Venda(Long idvenda) {
         this.idvenda = idvenda;
     }
 
-    public Venda(Integer idvenda, Date datavenda, long valortotal, long valorganho) {
+    public Venda(Long idvenda, Date datavenda, long valortotal, long valorganho, short estado) {
         this.idvenda = idvenda;
         this.datavenda = datavenda;
         this.valortotal = valortotal;
         this.valorganho = valorganho;
+        this.estado = estado;
     }
 
-    public Integer getIdvenda() {
+    public Long getIdvenda() {
         return idvenda;
     }
 
-    public void setIdvenda(Integer idvenda) {
+    public void setIdvenda(Long idvenda) {
         this.idvenda = idvenda;
     }
 
@@ -113,6 +117,14 @@ public class Venda implements Serializable {
         this.valorganho = valorganho;
     }
 
+    public short getEstado() {
+        return estado;
+    }
+
+    public void setEstado(short estado) {
+        this.estado = estado;
+    }
+
     public Funcionario getIdfuncionario() {
         return idfuncionario;
     }
@@ -138,12 +150,12 @@ public class Venda implements Serializable {
     }
 
     @XmlTransient
-    public List<Produtovenda> getProdutovendaList() {
-        return produtovendaList;
+    public Collection<Produtovenda> getProdutovendaCollection() {
+        return produtovendaCollection;
     }
 
-    public void setProdutovendaList(List<Produtovenda> produtovendaList) {
-        this.produtovendaList = produtovendaList;
+    public void setProdutovendaCollection(Collection<Produtovenda> produtovendaCollection) {
+        this.produtovendaCollection = produtovendaCollection;
     }
 
     @Override

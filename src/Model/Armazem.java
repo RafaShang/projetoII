@@ -6,12 +6,11 @@
 package Model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -44,12 +43,12 @@ public class Armazem implements Serializable {
     @Column(name = "NOME")
     private String nome;
     @JoinColumn(name = "IDLOCALIDADE", referencedColumnName = "IDLOCALIDADE")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Localidade idlocalidade;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idarmazem", fetch = FetchType.LAZY)
-    private List<Entrega> entregaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "armazem", fetch = FetchType.LAZY)
-    private List<Caixa> caixaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idarmazem")
+    private Collection<Entrega> entregaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "armazem")
+    private Collection<Caixa> caixaCollection;
 
     public Armazem() {
     }
@@ -88,21 +87,21 @@ public class Armazem implements Serializable {
     }
 
     @XmlTransient
-    public List<Entrega> getEntregaList() {
-        return entregaList;
+    public Collection<Entrega> getEntregaCollection() {
+        return entregaCollection;
     }
 
-    public void setEntregaList(List<Entrega> entregaList) {
-        this.entregaList = entregaList;
+    public void setEntregaCollection(Collection<Entrega> entregaCollection) {
+        this.entregaCollection = entregaCollection;
     }
 
     @XmlTransient
-    public List<Caixa> getCaixaList() {
-        return caixaList;
+    public Collection<Caixa> getCaixaCollection() {
+        return caixaCollection;
     }
 
-    public void setCaixaList(List<Caixa> caixaList) {
-        this.caixaList = caixaList;
+    public void setCaixaCollection(Collection<Caixa> caixaCollection) {
+        this.caixaCollection = caixaCollection;
     }
 
     @Override

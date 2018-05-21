@@ -6,12 +6,11 @@
 package Model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -41,8 +40,8 @@ public class Tipopagamento implements Serializable {
     @Basic(optional = false)
     @Column(name = "NOME")
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipopagamento", fetch = FetchType.LAZY)
-    private List<Venda> vendaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipopagamento")
+    private Collection<Venda> vendaCollection;
 
     public Tipopagamento() {
     }
@@ -73,12 +72,12 @@ public class Tipopagamento implements Serializable {
     }
 
     @XmlTransient
-    public List<Venda> getVendaList() {
-        return vendaList;
+    public Collection<Venda> getVendaCollection() {
+        return vendaCollection;
     }
 
-    public void setVendaList(List<Venda> vendaList) {
-        this.vendaList = vendaList;
+    public void setVendaCollection(Collection<Venda> vendaCollection) {
+        this.vendaCollection = vendaCollection;
     }
 
     @Override

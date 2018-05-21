@@ -6,13 +6,12 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -71,20 +70,20 @@ public class Funcionario implements Serializable {
     @Basic(optional = false)
     @Column(name = "TIPO")
     private short tipo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idfuncionario", fetch = FetchType.LAZY)
-    private List<Venda> vendaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario", fetch = FetchType.LAZY)
-    private List<Pontohorario> pontohorarioList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idfuncionario")
+    private Collection<Venda> vendaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
+    private Collection<Pontohorario> pontohorarioCollection;
     @JoinColumn(name = "IDHORARIO", referencedColumnName = "IDHORARIO")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Horario idhorario;
     @JoinColumn(name = "IDLOCALTRABALHO", referencedColumnName = "IDLOCALTRABALHO")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Localtrabalho idlocaltrabalho;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idfuncionarioentrega", fetch = FetchType.LAZY)
-    private List<Entrega> entregaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idfuncionariorecebe", fetch = FetchType.LAZY)
-    private List<Entrega> entregaList1;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idfuncionarioentrega")
+    private Collection<Entrega> entregaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idfuncionariorecebe")
+    private Collection<Entrega> entregaCollection1;
 
     public Funcionario() {
     }
@@ -169,21 +168,21 @@ public class Funcionario implements Serializable {
     }
 
     @XmlTransient
-    public List<Venda> getVendaList() {
-        return vendaList;
+    public Collection<Venda> getVendaCollection() {
+        return vendaCollection;
     }
 
-    public void setVendaList(List<Venda> vendaList) {
-        this.vendaList = vendaList;
+    public void setVendaCollection(Collection<Venda> vendaCollection) {
+        this.vendaCollection = vendaCollection;
     }
 
     @XmlTransient
-    public List<Pontohorario> getPontohorarioList() {
-        return pontohorarioList;
+    public Collection<Pontohorario> getPontohorarioCollection() {
+        return pontohorarioCollection;
     }
 
-    public void setPontohorarioList(List<Pontohorario> pontohorarioList) {
-        this.pontohorarioList = pontohorarioList;
+    public void setPontohorarioCollection(Collection<Pontohorario> pontohorarioCollection) {
+        this.pontohorarioCollection = pontohorarioCollection;
     }
 
     public Horario getIdhorario() {
@@ -203,21 +202,21 @@ public class Funcionario implements Serializable {
     }
 
     @XmlTransient
-    public List<Entrega> getEntregaList() {
-        return entregaList;
+    public Collection<Entrega> getEntregaCollection() {
+        return entregaCollection;
     }
 
-    public void setEntregaList(List<Entrega> entregaList) {
-        this.entregaList = entregaList;
+    public void setEntregaCollection(Collection<Entrega> entregaCollection) {
+        this.entregaCollection = entregaCollection;
     }
 
     @XmlTransient
-    public List<Entrega> getEntregaList1() {
-        return entregaList1;
+    public Collection<Entrega> getEntregaCollection1() {
+        return entregaCollection1;
     }
 
-    public void setEntregaList1(List<Entrega> entregaList1) {
-        this.entregaList1 = entregaList1;
+    public void setEntregaCollection1(Collection<Entrega> entregaCollection1) {
+        this.entregaCollection1 = entregaCollection1;
     }
 
     @Override

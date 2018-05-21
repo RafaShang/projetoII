@@ -6,13 +6,12 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -56,19 +55,19 @@ public class Entrega implements Serializable {
     @Basic(optional = false)
     @Column(name = "CONFIRMADO")
     private short confirmado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "entrega", fetch = FetchType.LAZY)
-    private List<Produtoentrega> produtoentregaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "entrega")
+    private Collection<Produtoentrega> produtoentregaCollection;
     @JoinColumn(name = "IDARMAZEM", referencedColumnName = "IDARMAZEM")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Armazem idarmazem;
     @JoinColumn(name = "IDFUNCIONARIOENTREGA", referencedColumnName = "IDFUNCIONARIO")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Funcionario idfuncionarioentrega;
     @JoinColumn(name = "IDFUNCIONARIORECEBE", referencedColumnName = "IDFUNCIONARIO")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Funcionario idfuncionariorecebe;
     @JoinColumn(name = "IDLOJA", referencedColumnName = "IDLOJA")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Loja idloja;
 
     public Entrega() {
@@ -118,12 +117,12 @@ public class Entrega implements Serializable {
     }
 
     @XmlTransient
-    public List<Produtoentrega> getProdutoentregaList() {
-        return produtoentregaList;
+    public Collection<Produtoentrega> getProdutoentregaCollection() {
+        return produtoentregaCollection;
     }
 
-    public void setProdutoentregaList(List<Produtoentrega> produtoentregaList) {
-        this.produtoentregaList = produtoentregaList;
+    public void setProdutoentregaCollection(Collection<Produtoentrega> produtoentregaCollection) {
+        this.produtoentregaCollection = produtoentregaCollection;
     }
 
     public Armazem getIdarmazem() {
