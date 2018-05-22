@@ -7,13 +7,14 @@ package Model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -45,15 +46,15 @@ public class Pontohorario implements Serializable {
     @Column(name = "DIASEMANA")
     private short diasemana;
     @JoinColumn(name = "IDFUNCIONARIO", referencedColumnName = "IDFUNCIONARIO", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Funcionario funcionario;
     @JoinColumn(name = "IDHORARIO", referencedColumnName = "IDHORARIO")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Horario idhorario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pontohorario")
-    private Collection<Pontossaida> pontossaidaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pontohorario")
-    private Collection<Pontosentrada> pontosentradaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pontohorario", fetch = FetchType.LAZY)
+    private List<Pontossaida> pontossaidaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pontohorario", fetch = FetchType.LAZY)
+    private List<Pontosentrada> pontosentradaList;
 
     public Pontohorario() {
     }
@@ -104,21 +105,21 @@ public class Pontohorario implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Pontossaida> getPontossaidaCollection() {
-        return pontossaidaCollection;
+    public List<Pontossaida> getPontossaidaList() {
+        return pontossaidaList;
     }
 
-    public void setPontossaidaCollection(Collection<Pontossaida> pontossaidaCollection) {
-        this.pontossaidaCollection = pontossaidaCollection;
+    public void setPontossaidaList(List<Pontossaida> pontossaidaList) {
+        this.pontossaidaList = pontossaidaList;
     }
 
     @XmlTransient
-    public Collection<Pontosentrada> getPontosentradaCollection() {
-        return pontosentradaCollection;
+    public List<Pontosentrada> getPontosentradaList() {
+        return pontosentradaList;
     }
 
-    public void setPontosentradaCollection(Collection<Pontosentrada> pontosentradaCollection) {
-        this.pontosentradaCollection = pontosentradaCollection;
+    public void setPontosentradaList(List<Pontosentrada> pontosentradaList) {
+        this.pontosentradaList = pontosentradaList;
     }
 
     @Override

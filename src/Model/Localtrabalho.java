@@ -6,10 +6,11 @@
 package Model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -35,8 +36,8 @@ public class Localtrabalho implements Serializable {
     @Basic(optional = false)
     @Column(name = "IDLOCALTRABALHO")
     private Short idlocaltrabalho;
-    @OneToMany(mappedBy = "idlocaltrabalho")
-    private Collection<Funcionario> funcionarioCollection;
+    @OneToMany(mappedBy = "idlocaltrabalho", fetch = FetchType.LAZY)
+    private List<Funcionario> funcionarioList;
 
     public Localtrabalho() {
     }
@@ -54,12 +55,12 @@ public class Localtrabalho implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Funcionario> getFuncionarioCollection() {
-        return funcionarioCollection;
+    public List<Funcionario> getFuncionarioList() {
+        return funcionarioList;
     }
 
-    public void setFuncionarioCollection(Collection<Funcionario> funcionarioCollection) {
-        this.funcionarioCollection = funcionarioCollection;
+    public void setFuncionarioList(List<Funcionario> funcionarioList) {
+        this.funcionarioList = funcionarioList;
     }
 
     @Override

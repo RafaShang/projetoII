@@ -7,12 +7,13 @@ package Model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -28,15 +29,15 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Rafael
  */
 @Entity
-@Table(name = "DISCONTO")
+@Table(name = "DESCONTO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Disconto.findAll", query = "SELECT d FROM Disconto d")
-    , @NamedQuery(name = "Disconto.findByIddesconto", query = "SELECT d FROM Disconto d WHERE d.iddesconto = :iddesconto")
-    , @NamedQuery(name = "Disconto.findByDatainicio", query = "SELECT d FROM Disconto d WHERE d.datainicio = :datainicio")
-    , @NamedQuery(name = "Disconto.findByDatafim", query = "SELECT d FROM Disconto d WHERE d.datafim = :datafim")
-    , @NamedQuery(name = "Disconto.findByValor", query = "SELECT d FROM Disconto d WHERE d.valor = :valor")})
-public class Disconto implements Serializable {
+    @NamedQuery(name = "Desconto.findAll", query = "SELECT d FROM Desconto d")
+    , @NamedQuery(name = "Desconto.findByIddesconto", query = "SELECT d FROM Desconto d WHERE d.iddesconto = :iddesconto")
+    , @NamedQuery(name = "Desconto.findByDatainicio", query = "SELECT d FROM Desconto d WHERE d.datainicio = :datainicio")
+    , @NamedQuery(name = "Desconto.findByDatafim", query = "SELECT d FROM Desconto d WHERE d.datafim = :datafim")
+    , @NamedQuery(name = "Desconto.findByValor", query = "SELECT d FROM Desconto d WHERE d.valor = :valor")})
+public class Desconto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -55,17 +56,17 @@ public class Disconto implements Serializable {
     @Basic(optional = false)
     @Column(name = "VALOR")
     private double valor;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddisconto")
-    private Collection<Produtoloja> produtolojaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddisconto", fetch = FetchType.LAZY)
+    private List<Produtoloja> produtolojaList;
 
-    public Disconto() {
+    public Desconto() {
     }
 
-    public Disconto(BigDecimal iddesconto) {
+    public Desconto(BigDecimal iddesconto) {
         this.iddesconto = iddesconto;
     }
 
-    public Disconto(BigDecimal iddesconto, Date datainicio, Date datafim, double valor) {
+    public Desconto(BigDecimal iddesconto, Date datainicio, Date datafim, double valor) {
         this.iddesconto = iddesconto;
         this.datainicio = datainicio;
         this.datafim = datafim;
@@ -105,12 +106,12 @@ public class Disconto implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Produtoloja> getProdutolojaCollection() {
-        return produtolojaCollection;
+    public List<Produtoloja> getProdutolojaList() {
+        return produtolojaList;
     }
 
-    public void setProdutolojaCollection(Collection<Produtoloja> produtolojaCollection) {
-        this.produtolojaCollection = produtolojaCollection;
+    public void setProdutolojaList(List<Produtoloja> produtolojaList) {
+        this.produtolojaList = produtolojaList;
     }
 
     @Override
@@ -123,10 +124,10 @@ public class Disconto implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Disconto)) {
+        if (!(object instanceof Desconto)) {
             return false;
         }
-        Disconto other = (Disconto) object;
+        Desconto other = (Desconto) object;
         if ((this.iddesconto == null && other.iddesconto != null) || (this.iddesconto != null && !this.iddesconto.equals(other.iddesconto))) {
             return false;
         }
@@ -135,7 +136,7 @@ public class Disconto implements Serializable {
 
     @Override
     public String toString() {
-        return "Model.Disconto[ iddesconto=" + iddesconto + " ]";
+        return "Model.Desconto[ iddesconto=" + iddesconto + " ]";
     }
     
 }

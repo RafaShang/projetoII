@@ -10,6 +10,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -38,10 +39,10 @@ public class Produtovenda implements Serializable {
     @Column(name = "QUANTIDADE")
     private short quantidade;
     @JoinColumn(name = "CODBARRAS", referencedColumnName = "CODBARRAS", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Produto produto;
     @JoinColumn(name = "IDVENDA", referencedColumnName = "IDVENDA", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Venda venda;
 
     public Produtovenda() {

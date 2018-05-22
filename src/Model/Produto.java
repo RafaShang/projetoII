@@ -6,11 +6,12 @@
 package Model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -55,25 +56,25 @@ public class Produto implements Serializable {
     @Column(name = "GENERO")
     private Character genero;
     @JoinColumn(name = "IDCOR", referencedColumnName = "IDCOR")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Cor idcor;
     @JoinColumn(name = "IDMARCA", referencedColumnName = "IDMARCA")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Marca idmarca;
     @JoinColumn(name = "IDTAMANHO", referencedColumnName = "IDTAMANHO")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Tamanho idtamanho;
     @JoinColumn(name = "IDTIPOPRODUTO", referencedColumnName = "IDTIPOPRODUTO")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Tipoproduto idtipoproduto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto")
-    private Collection<Produtoloja> produtolojaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto")
-    private Collection<Produtoentrega> produtoentregaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto")
-    private Collection<Produtovenda> produtovendaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto")
-    private Collection<Caixa> caixaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto", fetch = FetchType.LAZY)
+    private List<Produtoloja> produtolojaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto", fetch = FetchType.LAZY)
+    private List<Produtoentrega> produtoentregaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto", fetch = FetchType.LAZY)
+    private List<Produtovenda> produtovendaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto", fetch = FetchType.LAZY)
+    private List<Caixa> caixaList;
 
     public Produto() {
     }
@@ -163,39 +164,39 @@ public class Produto implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Produtoloja> getProdutolojaCollection() {
-        return produtolojaCollection;
+    public List<Produtoloja> getProdutolojaList() {
+        return produtolojaList;
     }
 
-    public void setProdutolojaCollection(Collection<Produtoloja> produtolojaCollection) {
-        this.produtolojaCollection = produtolojaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Produtoentrega> getProdutoentregaCollection() {
-        return produtoentregaCollection;
-    }
-
-    public void setProdutoentregaCollection(Collection<Produtoentrega> produtoentregaCollection) {
-        this.produtoentregaCollection = produtoentregaCollection;
+    public void setProdutolojaList(List<Produtoloja> produtolojaList) {
+        this.produtolojaList = produtolojaList;
     }
 
     @XmlTransient
-    public Collection<Produtovenda> getProdutovendaCollection() {
-        return produtovendaCollection;
+    public List<Produtoentrega> getProdutoentregaList() {
+        return produtoentregaList;
     }
 
-    public void setProdutovendaCollection(Collection<Produtovenda> produtovendaCollection) {
-        this.produtovendaCollection = produtovendaCollection;
+    public void setProdutoentregaList(List<Produtoentrega> produtoentregaList) {
+        this.produtoentregaList = produtoentregaList;
     }
 
     @XmlTransient
-    public Collection<Caixa> getCaixaCollection() {
-        return caixaCollection;
+    public List<Produtovenda> getProdutovendaList() {
+        return produtovendaList;
     }
 
-    public void setCaixaCollection(Collection<Caixa> caixaCollection) {
-        this.caixaCollection = caixaCollection;
+    public void setProdutovendaList(List<Produtovenda> produtovendaList) {
+        this.produtovendaList = produtovendaList;
+    }
+
+    @XmlTransient
+    public List<Caixa> getCaixaList() {
+        return caixaList;
+    }
+
+    public void setCaixaList(List<Caixa> caixaList) {
+        this.caixaList = caixaList;
     }
 
     @Override

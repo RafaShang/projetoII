@@ -6,11 +6,12 @@
 package Model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -40,8 +41,8 @@ public class Tipoproduto implements Serializable {
     @Basic(optional = false)
     @Column(name = "NOME")
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtipoproduto")
-    private Collection<Produto> produtoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtipoproduto", fetch = FetchType.LAZY)
+    private List<Produto> produtoList;
 
     public Tipoproduto() {
     }
@@ -72,12 +73,12 @@ public class Tipoproduto implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Produto> getProdutoCollection() {
-        return produtoCollection;
+    public List<Produto> getProdutoList() {
+        return produtoList;
     }
 
-    public void setProdutoCollection(Collection<Produto> produtoCollection) {
-        this.produtoCollection = produtoCollection;
+    public void setProdutoList(List<Produto> produtoList) {
+        this.produtoList = produtoList;
     }
 
     @Override

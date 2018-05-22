@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
@@ -41,7 +42,7 @@ public class Pontossaida implements Serializable {
         @JoinColumn(name = "IDPONTOHORARIO", referencedColumnName = "IDPONTOHORARIO")
         , @JoinColumn(name = "HORA", referencedColumnName = "DATA")
         , @JoinColumn(name = "IDPONTOSSAIDA", referencedColumnName = "IDFUNCIONARIO", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Pontohorario pontohorario;
 
     public Pontossaida() {

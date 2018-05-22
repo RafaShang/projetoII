@@ -7,12 +7,13 @@ package Model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -61,10 +62,10 @@ public class Horario implements Serializable {
     @Column(name = "HORASEGUNDASAIDA")
     @Temporal(TemporalType.TIMESTAMP)
     private Date horasegundasaida;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idhorario")
-    private Collection<Pontohorario> pontohorarioCollection;
-    @OneToMany(mappedBy = "idhorario")
-    private Collection<Funcionario> funcionarioCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idhorario", fetch = FetchType.LAZY)
+    private List<Pontohorario> pontohorarioList;
+    @OneToMany(mappedBy = "idhorario", fetch = FetchType.LAZY)
+    private List<Funcionario> funcionarioList;
 
     public Horario() {
     }
@@ -122,21 +123,21 @@ public class Horario implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Pontohorario> getPontohorarioCollection() {
-        return pontohorarioCollection;
+    public List<Pontohorario> getPontohorarioList() {
+        return pontohorarioList;
     }
 
-    public void setPontohorarioCollection(Collection<Pontohorario> pontohorarioCollection) {
-        this.pontohorarioCollection = pontohorarioCollection;
+    public void setPontohorarioList(List<Pontohorario> pontohorarioList) {
+        this.pontohorarioList = pontohorarioList;
     }
 
     @XmlTransient
-    public Collection<Funcionario> getFuncionarioCollection() {
-        return funcionarioCollection;
+    public List<Funcionario> getFuncionarioList() {
+        return funcionarioList;
     }
 
-    public void setFuncionarioCollection(Collection<Funcionario> funcionarioCollection) {
-        this.funcionarioCollection = funcionarioCollection;
+    public void setFuncionarioList(List<Funcionario> funcionarioList) {
+        this.funcionarioList = funcionarioList;
     }
 
     @Override

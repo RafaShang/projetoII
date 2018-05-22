@@ -6,12 +6,13 @@
 package Model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -59,16 +60,16 @@ public class Venda implements Serializable {
     @Column(name = "ESTADO")
     private short estado;
     @JoinColumn(name = "IDFUNCIONARIO", referencedColumnName = "IDFUNCIONARIO")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Funcionario idfuncionario;
     @JoinColumn(name = "IDLOJA", referencedColumnName = "IDLOJA")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Loja idloja;
     @JoinColumn(name = "TIPOPAGAMENTO", referencedColumnName = "IDTIPOPAGAMENTO")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Tipopagamento tipopagamento;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "venda")
-    private Collection<Produtovenda> produtovendaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "venda", fetch = FetchType.LAZY)
+    private List<Produtovenda> produtovendaList;
 
     public Venda() {
     }
@@ -150,12 +151,12 @@ public class Venda implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Produtovenda> getProdutovendaCollection() {
-        return produtovendaCollection;
+    public List<Produtovenda> getProdutovendaList() {
+        return produtovendaList;
     }
 
-    public void setProdutovendaCollection(Collection<Produtovenda> produtovendaCollection) {
-        this.produtovendaCollection = produtovendaCollection;
+    public void setProdutovendaList(List<Produtovenda> produtovendaList) {
+        this.produtovendaList = produtovendaList;
     }
 
     @Override

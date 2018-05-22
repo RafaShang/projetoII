@@ -6,11 +6,12 @@
 package Model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -42,14 +43,14 @@ public class Loja implements Serializable {
     @Basic(optional = false)
     @Column(name = "NOME")
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idloja")
-    private Collection<Venda> vendaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "loja")
-    private Collection<Produtoloja> produtolojaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idloja")
-    private Collection<Entrega> entregaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idloja", fetch = FetchType.LAZY)
+    private List<Venda> vendaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "loja", fetch = FetchType.LAZY)
+    private List<Produtoloja> produtolojaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idloja", fetch = FetchType.LAZY)
+    private List<Entrega> entregaList;
     @JoinColumn(name = "IDLOCALIDADE", referencedColumnName = "IDLOCALIDADE")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Localidade idlocalidade;
 
     public Loja() {
@@ -81,30 +82,30 @@ public class Loja implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Venda> getVendaCollection() {
-        return vendaCollection;
+    public List<Venda> getVendaList() {
+        return vendaList;
     }
 
-    public void setVendaCollection(Collection<Venda> vendaCollection) {
-        this.vendaCollection = vendaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Produtoloja> getProdutolojaCollection() {
-        return produtolojaCollection;
-    }
-
-    public void setProdutolojaCollection(Collection<Produtoloja> produtolojaCollection) {
-        this.produtolojaCollection = produtolojaCollection;
+    public void setVendaList(List<Venda> vendaList) {
+        this.vendaList = vendaList;
     }
 
     @XmlTransient
-    public Collection<Entrega> getEntregaCollection() {
-        return entregaCollection;
+    public List<Produtoloja> getProdutolojaList() {
+        return produtolojaList;
     }
 
-    public void setEntregaCollection(Collection<Entrega> entregaCollection) {
-        this.entregaCollection = entregaCollection;
+    public void setProdutolojaList(List<Produtoloja> produtolojaList) {
+        this.produtolojaList = produtolojaList;
+    }
+
+    @XmlTransient
+    public List<Entrega> getEntregaList() {
+        return entregaList;
+    }
+
+    public void setEntregaList(List<Entrega> entregaList) {
+        this.entregaList = entregaList;
     }
 
     public Localidade getIdlocalidade() {
