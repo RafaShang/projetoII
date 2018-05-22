@@ -9,27 +9,27 @@
    <left>
       <Pane prefHeight="290.0" prefWidth="125.0" style="-fx-background-color: #E2E2E2;" BorderPane.alignment="CENTER">
          <children>
-            <Button id="produtosBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="125.0" stylesheets="@css/button/warehouseLeftMenuButton.css" text="PRODUTOS">
+            <Button id="produtosBtn" focusTraversable="false" mnemonicParsing="false" prefHeight="40.0" prefWidth="125.0" stylesheets="@css/button/warehouseLeftMenuButton.css" text="PRODUTOS">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button id="categoriasBtn" layoutY="42.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="125.0" stylesheets="@css/button/warehouseLeftMenuButton.css" text="CATEGORIAS">
+            <Button id="categoriasBtn" focusTraversable="false" layoutY="42.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="125.0" stylesheets="@css/button/warehouseLeftMenuButton.css" text="CATEGORIAS">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button id="marcasBtn" layoutY="84.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="125.0" stylesheets="@css/button/warehouseLeftMenuButton.css" text="MARCAS">
+            <Button id="marcasBtn" focusTraversable="false" layoutY="84.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="125.0" stylesheets="@css/button/warehouseLeftMenuButton.css" text="MARCAS">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button id="tamanhosBtn" layoutY="126.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="125.0" stylesheets="@css/button/warehouseLeftMenuButton.css" text="TAMANHOS">
+            <Button id="tamanhosBtn" focusTraversable="false" layoutY="126.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="125.0" stylesheets="@css/button/warehouseLeftMenuButton.css" text="TAMANHOS">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button id="coresBtn" layoutY="168.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="125.0" stylesheets="@css/button/warehouseLeftMenuButton.css" text="CORES">
+            <Button id="coresBtn" focusTraversable="false" layoutY="168.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="125.0" stylesheets="@css/button/warehouseLeftMenuButton.css" text="CORES">
                <font>
                   <Font size="14.0" />
                </font>

@@ -9,22 +9,22 @@
    <top>
       <Pane layoutX="-1.0" prefHeight="60.0" prefWidth="706.0" style="-fx-background-color: #2a2a2a;" BorderPane.alignment="CENTER">
          <children>
-            <Button id="armazemBtn" fx:id="armazemButton" mnemonicParsing="false" prefHeight="59.0" prefWidth="175.0" stylesheets="@css/button/warehouseTopMenuButton.css" text="ARMAZÉM" textFill="WHITE">
+            <Button id="armazemBtn" fx:id="armazemButton" focusTraversable="false" mnemonicParsing="false" prefHeight="59.0" prefWidth="175.0" stylesheets="@css/button/warehouseTopMenuButton.css" text="ARMAZÉM" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button id="funcionariosBtn" fx:id="funcionariosButton" layoutX="177.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="175.0" stylesheets="@css/button/warehouseTopMenuButton.css" text="FUNCIONÁRIOS" textFill="WHITE">
+            <Button id="funcionariosBtn" fx:id="funcionariosButton" focusTraversable="false" layoutX="177.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="175.0" stylesheets="@css/button/warehouseTopMenuButton.css" text="FUNCIONÁRIOS" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button id="reposicoesBtn" fx:id="reposicoesButton" layoutX="354.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="175.0" stylesheets="@css/button/warehouseTopMenuButton.css" text="REPOSIÇÕES" textFill="WHITE">
+            <Button id="reposicoesBtn" fx:id="reposicoesButton" focusTraversable="false" layoutX="354.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="175.0" stylesheets="@css/button/warehouseTopMenuButton.css" text="REPOSIÇÕES" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button id="caixasBtn" fx:id="caixasButton" layoutX="531.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="175.0" stylesheets="@css/button/warehouseTopMenuButton.css" text="CAIXAS" textFill="WHITE">
+            <Button id="caixasBtn" fx:id="caixasButton" focusTraversable="false" layoutX="531.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="175.0" stylesheets="@css/button/warehouseTopMenuButton.css" text="CAIXAS" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
